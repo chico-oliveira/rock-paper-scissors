@@ -52,7 +52,12 @@ function game(){
     
     // Loops the 5 rounds
     for (let i=0; i < 5; i++){
+
+        // Gets player's selection and ensures it's one of the possible options
         let player = window.prompt("Choose Rock, Paper or Scissors!");
+        while (!options.includes(player.toLowerCase())){
+            player = window.prompt("You didn't choose one of the options, ensure it's either Rock, Paper or Scissors!");
+        }
         let computer = computerPlay();
         
         // Plays round and stores result
@@ -67,6 +72,11 @@ function game(){
         }
     }
     
+    displayResult(playerScore, computerScore);
+}
+
+// Gets the scores and determines the result
+function displayResult(playerScore, computerScore){
     let finalScore = `  [Score: ${playerScore} - ${computerScore}]`;
 
     console.log("--------------------------------------------");    
