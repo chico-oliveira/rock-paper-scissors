@@ -92,5 +92,3 @@ function displayResult(playerScore, computerScore){
     }
     console.log("--------------------------------------------");
 }
-
-game();
