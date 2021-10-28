@@ -5,10 +5,12 @@ Creates variables so colours can be called throughout the css file
 */
 
 :root {
-  --background-theme: rgb(218, 220, 224);
-  --footer-theme: rgb(146, 146, 146);
+  --dark-blue: #141B41;
+  --button-text: #306BAC;
+  --button-bg: #6F9CEB;
+  --background-theme: #98B9F2;
+  --footer-theme: #918EF4;
 }
-
 
 /*
 ###########
@@ -22,31 +24,83 @@ html, body {
 
 body {
   height: 100vh; 
+  background-color: var(--background-theme);
 }
 
-body, input, button {
-  font-size: 14px;
-  font-family: arial,sans-serif;
-  color: #222;
+h1 {
+  font-size: 48px;    
+  font-weight: bolder;
+  font-family: 'Roboto', sans-serif;
+  color: var(--dark-blue);
 }
+
+button {
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--button-bg);
+  border-color: var(--button-text);
+  color: var(--dark-blue);
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+/* 
+################
+Main styles
+################
+*/
 
 .content {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: var(--background-theme);
 }
 
 header, main, footer {
   flex-shrink: 0;
 }
 
+.sticky-footer {
+  flex: auto;
+}
+
+/** Header section
+*/
+
+header {
+  margin-bottom: 30px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/** Main section
+*/
+
+main {
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+main button {
+  padding: 6px 28px;
+  min-width:115px;
+  border-width: 2px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/** Footer section
+*/
+
 footer {
   min-height: 15px;
   background-color: var(--footer-theme);
 }
 
-.sticky-footer {
-  flex-shrink: 0;
-  flex: auto;
-}
+
