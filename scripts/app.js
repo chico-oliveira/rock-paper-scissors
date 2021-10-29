@@ -1,3 +1,7 @@
+///////////////
+// FUNCTIONS //
+///////////////
+
 // Creates possible options array
 let options = ["rock", "paper", "scissors"];
 
@@ -7,13 +11,19 @@ function Capitalize(string){
 }
 
 // returns one of the possibilities at random
-function computerPlay(){
+function computerPick(){
 
     // Creates random number between 1 and 3 inclusive to use as an index for the array
     let index = Math.floor(Math.random()*(options.length));
 
     // Use the index to return the answer
     return options[index];
+}
+
+// Starts game based on what button the player picked
+function playerPick(e){
+    let playerSelection = e.target.textContent;
+    game(playerSelection);
 }
 
 // Play one round of Rock Paper Scissors. Receive player and computer selections
@@ -45,17 +55,12 @@ function playRound(playerSelection, computerSelection){
 }
 
 // Full 5 round game
-function game(){
+function game(player){
 
     let playerScore = 0;
     let computerScore = 0;
-    
-    // Gets player's selection and ensures it's one of the possible options
-    let player = window.prompt("Choose Rock, Paper or Scissors!");
-    while (!options.includes(player.toLowerCase())){
-        player = window.prompt("You didn't choose one of the options, ensure it's either Rock, Paper or Scissors!");
-    }
-    let computer = computerPlay();
+
+    let computer = computerPick();
     
     // Plays round and stores result
     let win = playRound(player, computer);
@@ -88,3 +93,12 @@ function displayResult(playerScore, computerScore){
     }
     console.log("--------------------------------------------");
 }
+
+/////////////////
+// DOM METHODS //
+/////////////////
+
+const buttons = document.querySelectorAll("button");
+buttons.forEach(button => {
+    button.addEventListener('click', playerPick);
+});
