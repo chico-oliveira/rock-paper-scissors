@@ -88,6 +88,7 @@ main {
 }
 
 .display {
+  min-width: 1000px;
   display: flex;
   flex-direction: column;
   margin-bottom: 40px;
@@ -102,6 +103,7 @@ main {
 
 .score {
   display: flex;
+  justify-content: center;
   gap: 40px;
 }
 
