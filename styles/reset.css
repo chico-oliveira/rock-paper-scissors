@@ -62,6 +62,19 @@ h6 {
   margin: 0;
 }
 
+/* Text-level semantics */
+/* ============================================ */
+
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+
+ a {
+  background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+}
+
 /* Forms */
 /* ============================================ */
 

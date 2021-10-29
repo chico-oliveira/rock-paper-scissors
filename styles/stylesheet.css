@@ -131,8 +131,29 @@ main button {
 */
 
 footer {
-  min-height: 15px;
+  padding: 10px;
   background-color: var(--footer-theme);
+  color: var(--cream-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
+
+footer img {
+  width: 28px;
+  padding-right: 6px;
+}
+
+footer a {
+  display: flex;
+  align-items: center;
+}
+
+footer p {
+  font-weight: 700;
+}
+
+
 
 
