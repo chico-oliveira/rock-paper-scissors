@@ -1,14 +1,25 @@
+/*
+#######
+Imports
+#######
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Share:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Outline&display=swap');
+
 /* 
-##################################################################
-Creates variables so colours can be called throughout the css file
-##################################################################
+#########
+Variables
+#########
 */
 
 :root {
   --dark-blue: #141B41;
+  --light-blue: #45eafe;
+  --pink80s: #f232dd;
+  --purple80s: #462bd8;
   --button-text: #306BAC;
   --button-bg: #6F9CEB;
-  --background-theme: #98B9F2;
   --footer-theme: #918EF4;
 }
 
@@ -24,22 +35,16 @@ html, body {
 
 body {
   height: 100vh; 
-  background-color: var(--background-theme);
-}
-
-h1 {
-  font-size: 48px;    
-  font-weight: bolder;
-  font-family: 'Roboto', sans-serif;
-  color: var(--dark-blue);
+  background-color: var(--light-blue);
+  font-family: 'Bungee Outline', cursive;
+  font-family: 'Share', cursive;
+  font-weight: 800;
 }
 
 button {
   font-size: 14px;
   font-family: 'Roboto', sans-serif;
-  background-color: var(--button-bg);
-  border-color: var(--button-text);
-  color: var(--dark-blue);
+  background-color: var(--light-blue);
 }
 
 button:hover {
@@ -76,11 +81,16 @@ header {
   justify-content: center;
 }
 
+header img {
+  margin-top: 10px;
+  width: 1200px;
+}
+
 /** Main section
 */
 
 main {
-  padding: 40px 0;
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,7 +104,9 @@ main {
   margin-bottom: 40px;
 }
 
-.display .text {
+.display .feedback {
+  font-size: 30px;
+  color: var(--dark-blue);
   display: flex;
   justify-content: center;
   padding: 10px;
@@ -121,10 +133,9 @@ main {
 main button {
   padding: 6px 28px;
   min-width:115px;
-  border-width: 2px;
-  border-radius: 8px;
   font-size: 16px;
   font-weight: 700;
+  text-align: center;
 }
 
 /** Footer section

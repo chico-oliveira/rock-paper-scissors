@@ -5,7 +5,7 @@
 const buttons = document.querySelectorAll("button");
 const playerScoreText = document.querySelector(".player .value");
 const computerScoreText = document.querySelector(".computer .value");
-const feedbackText = document.querySelector(".text");
+const feedbackText = document.querySelector(".feedback");
 
 // Creates possible options array
 let options = ["rock", "paper", "scissors"];
@@ -42,7 +42,7 @@ function computerPick(){
 
 // Starts game based on what button the player picked
 function playerPick(e){
-    let playerSelection = e.target.textContent;
+    let playerSelection = e.target.getAttribute("alt");
     game(playerSelection);
 }
 
