@@ -4,7 +4,9 @@
 
 const buttons = document.querySelectorAll("button");
 const playerScoreText = document.querySelector(".player .value");
+const playerChoiceDisplay = document.querySelector(".player .choice");
 const computerScoreText = document.querySelector(".computer .value");
+const computerChoiceDisplay = document.querySelector(".computer .choice");
 const feedbackText = document.querySelector(".feedback");
 
 // Creates possible options array
@@ -42,14 +44,53 @@ function computerPick(){
 
 // Starts game based on what button the player picked
 function playerPick(e){
-    let playerSelection = e.target.getAttribute("alt");
+    let playerSelection = e.currentTarget.getAttribute("id");
     game(playerSelection);
 }
+
+// Displays the choices by the player and computer
+function Display_Choices(playerSelection, computerSelection){
+
+    // Removes previous images if they exist
+    if(computerChoiceDisplay.hasChildNodes()){
+        computerChoiceDisplay.removeChild(computerChoiceDisplay.lastChild);
+        playerChoiceDisplay.removeChild(playerChoiceDisplay.lastChild);
+    }
+
+    let selection;
+    let container;
+
+    // Creates new images and adds them to their respective elements 
+    for (let i = 0; i < 2; i++){
+        // Player
+        if (i === 0){
+            selection = playerSelection;
+            container = playerChoiceDisplay;
+        }
+        // Computer
+        else {
+            selection = computerSelection;
+            container = computerChoiceDisplay;
+        }
+
+        // Creates new image elements
+        let choice = "images/" + selection + "-choice.png";
+        let alt = selection + " icon";
+        const img = document.createElement('img');
+        img.src = choice;
+        img.alt = alt;
+        container.appendChild(img);
+    }
+}
+
 
 // Full 5 round game
 function game(player){
 
     let computer = computerPick();
+    
+    // Displays Players' choices
+    Display_Choices(player, computer);
     
     // Plays round and stores result
     let win = playRound(player, computer);
@@ -80,6 +121,8 @@ function playRound(playerSelection, computerSelection){
     // In case of same selection, return a draw
     if (playerSelection === computerSelection){
         feedbackText.textContent = `You Draw! Both picked ${Capitalize(computerSelection)}`;
+        playerChoiceDisplay.classList.toggle("lost", false);
+        computerChoiceDisplay.classList.toggle("lost", false);
         return null
     }
 
@@ -88,6 +131,8 @@ function playRound(playerSelection, computerSelection){
         (playerSelection === "paper" && computerSelection === "rock")){
         
         feedbackText.textContent = `You Win this round! ${Capitalize(playerSelection)} beats ${Capitalize(computerSelection)}`;
+        playerChoiceDisplay.classList.toggle("lost", false);
+        computerChoiceDisplay.classList.toggle("lost", true);
         return true
     } 
 
@@ -96,6 +141,8 @@ function playRound(playerSelection, computerSelection){
     (computerSelection === "paper" && playerSelection === "rock")){
     
         feedbackText.textContent = `You Lost this round! ${Capitalize(computerSelection)} beats ${Capitalize(playerSelection)}`;
+        computerChoiceDisplay.classList.toggle("lost", false);
+        playerChoiceDisplay.classList.toggle("lost", true);
         return false
     } 
 }

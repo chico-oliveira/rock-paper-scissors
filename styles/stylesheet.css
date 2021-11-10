@@ -14,7 +14,7 @@ Variables
 */
 
 :root {
-  --dark-blue: #141B41;
+  --dark-blue: #0f1431;
   --light-blue: #45eafe;
   --pink80s: #f232dd;
   --purple80s: #462bd8;
@@ -39,16 +39,6 @@ body {
   font-family: 'Bungee Outline', cursive;
   font-family: 'Share', cursive;
   font-weight: 800;
-}
-
-button {
-  font-size: 14px;
-  font-family: 'Roboto', sans-serif;
-  background-color: var(--light-blue);
-}
-
-button:hover {
-  cursor: pointer;
 }
 
 /* 
@@ -94,17 +84,17 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 10px;
 }
 
 .display {
   min-width: 1000px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 40px;
+  margin-bottom: 0px;
 }
 
-.display .feedback {
+.feedback {
   font-size: 30px;
   color: var(--dark-blue);
   display: flex;
@@ -119,23 +109,60 @@ main {
   gap: 40px;
 }
 
+.text {
+  display: flex;
+  justify-content: center;
+  font-size: 3vw;
+  color: var(--dark-blue);
+  gap: 10px;
+}
+
+.choice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+}
+
+.choice img {
+  width: 60%;
+}
+
+.lost img {
+  filter: saturate(15%);
+  width: 50%;
+}
+
 .player, .computer {
   padding: 10px;
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
 }
 
 .buttons {
   display: flex;
-  gap: 20px;
+  gap: 60px;
 }
 
-main button {
+.buttons button {  
+  background-color: var(--light-blue);
   padding: 6px 28px;
-  min-width:115px;
-  font-size: 16px;
-  font-weight: 700;
   text-align: center;
+  width: 150px;
+  height: 150px;
+  border-width: 2px;
+}
+
+.buttons img {
+  width: 100%;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 /** Footer section
@@ -143,8 +170,8 @@ main button {
 
 footer {
   padding: 10px;
-  background-color: var(--footer-theme);
-  color: var(--cream-white);
+  background-color: var(--pink80s);
+  color: var(--dark-blue);
   display: flex;
   justify-content: center;
   align-items: center;
