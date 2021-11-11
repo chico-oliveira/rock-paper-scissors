@@ -17,6 +17,8 @@ Variables
   --dark-blue: #0f1431;
   --light-blue: #45eafe;
   --pink80s: #f232dd;
+  --purple3: #B930DB;
+  --purple2: #7F2DDA;
   --purple80s: #462bd8;
   --button-text: #306BAC;
   --button-bg: #85c6ff;
@@ -39,6 +41,25 @@ body {
   font-family: 'Bungee Outline', cursive;
   font-family: 'Share', cursive;
   font-weight: 800;
+}
+
+button {
+  background-color: var(--button-bg);
+  text-align: center;
+  border-width: 3px;
+  border-radius: 8px;
+  border-color: var(--purple80s);
+}
+
+button:hover, button:focus-visible {
+  cursor: pointer;
+  outline: 2px solid var(--pink80s);
+}
+
+button:hover img, button:focus-visible img {
+  -webkit-animation: hover 1s infinite;
+  animation: hover 1s infinite;
+  animation-timing-function: linear;
 }
 
 /* 
@@ -97,8 +118,6 @@ main {
 .feedback {
   font-size: 30px;
   color: var(--dark-blue);
-  display: flex;
-  justify-content: center;
   padding: 10px;
   margin-bottom: 40px;
 }
@@ -149,14 +168,9 @@ main {
 }
 
 .buttons button {  
-  background-color: var(--button-bg);
   padding: 6px 28px;
-  text-align: center;
   width: 150px;
   height: 150px;
-  border-width: 3px;
-  border-radius: 8px;
-  border-color: var(--purple80s);
 }
 
 .buttons img {
@@ -166,17 +180,6 @@ main {
 /*Specific adjustment to the scissors icon*/
 #scissors img {
   width: 85%;
-}
-
-button:hover, button:focus-visible {
-  cursor: pointer;
-  outline: 2px solid var(--pink80s);
-}
-
-button:hover img, button:focus-visible img {
-  -webkit-animation: hover 1.25s infinite;
-  animation: hover 1.25s infinite;
-  animation-timing-function: linear;
 }
 
 /** Footer section
@@ -210,6 +213,78 @@ footer p {
   font-weight: 700;
 }
 
+/** End Screen
+*/
+
+.end-text {
+  position: relative;
+  width: inherit;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.end-feedback {
+  position: absolute;
+  top: 0;
+  font-size: 80px;
+}
+
+#feedback1 {
+  color: var(--purple80s);
+}
+
+#feedback2 {
+  margin-top: -4px;
+  margin-left: 8px;
+  color: var(--pink80s)
+}
+
+.end-screen {
+  visibility: hidden;
+  opacity: 0;
+  position: fixed;
+  width: 500px;
+  z-index: 101;
+  bottom: 40%;
+  padding: 40px;
+  background-color: var(--light-blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  transition: 0.2s linear;
+}
+            
+.overlay {
+  visibility: hidden;
+  opacity: 0;
+  background: rgba(0, 0, 0, .5);
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vw;
+  z-index: 100;
+  transition: 0.2s linear;
+}
+
+.end-screen.show{
+  visibility: visible;
+  opacity: 1;
+  transition: 0.2s linear;
+  animation: border_color 1s linear infinite;
+}
+
+.overlay.show {
+  visibility: visible;
+  opacity: 1;
+  transition: 0.2s linear;
+}
+
+.end-screen button {
+  padding: 10px 30px;
+  font-size: 30px;
+  color: var(--dark-blue);
+}
 
 /*
 ##########
@@ -230,4 +305,62 @@ Animations
   25% { transform: translateY(-6px); }
   75% { transform: translateY(6px); }
   100% { transform: translateY(0px); }
+  }
+
+@-webkit-keyframes border_color {
+  0% { 
+    box-shadow:
+    0 0 0 5px var(--purple80s),
+    0 0 0 10px var(--purple2),
+    0 0 0 15px var(--purple3),
+    0 0 0 20px var(--pink80s); }
+  25% { box-shadow:
+    0 0 0 5px var(--pink80s),
+    0 0 0 10px var(--purple80s),
+    0 0 0 15px var(--purple2),
+    0 0 0 20px var(--purple3); }
+  50% { box-shadow:
+    0 0 0 5px var(--purple3),
+    0 0 0 10px var(--pink80s),
+    0 0 0 15px var(--purple80s),
+    0 0 0 20px var(--purple2); }
+  75% { box-shadow:
+    0 0 0 5px var(--purple2),
+    0 0 0 10px var(--purple3),
+    0 0 0 15px var(--pink80s),
+    0 0 0 20px var(--purple80s); }
+  100% { box-shadow:
+    0 0 0 5px var(--purple80s),
+    0 0 0 10px var(--purple2),
+    0 0 0 15px var(--purple3),
+    0 0 0 20px var(--pink80s); } 
+  }
+
+@keyframes border_color {
+  0% { 
+    box-shadow:
+    0 0 0 5px var(--purple80s),
+    0 0 0 10px var(--purple2),
+    0 0 0 15px var(--purple3),
+    0 0 0 20px var(--pink80s); }
+  25% { box-shadow:
+    0 0 0 5px var(--pink80s),
+    0 0 0 10px var(--purple80s),
+    0 0 0 15px var(--purple2),
+    0 0 0 20px var(--purple3); }
+  50% { box-shadow:
+    0 0 0 5px var(--purple3),
+    0 0 0 10px var(--pink80s),
+    0 0 0 15px var(--purple80s),
+    0 0 0 20px var(--purple2); }
+  75% { box-shadow:
+    0 0 0 5px var(--purple2),
+    0 0 0 10px var(--purple3),
+    0 0 0 15px var(--pink80s),
+    0 0 0 20px var(--purple80s); }
+  100% { box-shadow:
+    0 0 0 5px var(--purple80s),
+    0 0 0 10px var(--purple2),
+    0 0 0 15px var(--purple3),
+    0 0 0 20px var(--pink80s); } 
   }

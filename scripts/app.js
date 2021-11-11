@@ -2,12 +2,16 @@
 // VARIABLES //
 ///////////////
 
-const buttons = document.querySelectorAll("button");
+const gameButtons = document.querySelectorAll(".buttons button");
+const newGameButton = document.querySelector(".end-screen button");
 const playerScoreText = document.querySelector(".player .value");
 const playerChoiceDisplay = document.querySelector(".player .choice");
 const computerScoreText = document.querySelector(".computer .value");
 const computerChoiceDisplay = document.querySelector(".computer .choice");
 const feedbackText = document.querySelector(".feedback");
+const endFeedbackTexts = document.querySelectorAll(".end-feedback");
+const endScreen = document.querySelector(".end-screen");
+const overlay = document.querySelector(".overlay");
 
 // Creates possible options array
 let options = ["rock", "paper", "scissors"];
@@ -18,9 +22,11 @@ let computerScore = 0;
 // DOM METHODS //
 /////////////////
 
-buttons.forEach(button => {
+gameButtons.forEach(button => {
     button.addEventListener('click', playerPick);
 });
+
+newGameButton.addEventListener('click', startNewGame);
 
 ///////////////
 // FUNCTIONS //
@@ -158,17 +164,31 @@ function UpdateResult(){
 function endGame(win){
     
     if (win){
-        feedbackText.textContent = "Congratulations, you won the game! :)";
+        endFeedbackTexts.forEach(feedback => {
+            feedback.textContent = "YOU WIN";
+        });
     }
     else {
-        feedbackText.textContent = "Sadge! You lost..";
+        endFeedbackTexts.forEach(feedback => {
+            feedback.textContent = "YOU LOSE";
+        });
     }
+
+    feedbackText.textContent = '\xa0';
+    endScreen.classList.toggle("show");
+    overlay.classList.toggle("show");
+}
+
+function startNewGame() {
+
+    endScreen.classList.toggle("show");
+    overlay.classList.toggle("show");
 
     playerScore = 0;
     computerScore = 0;
+    feedbackText.textContent = "Choose your fate";
+    computerChoiceDisplay.removeChild(computerChoiceDisplay.lastChild);
+    playerChoiceDisplay.removeChild(playerChoiceDisplay.lastChild);
 
-    UpdateResult();
+    UpdateResult(); 
 }
-
-
-
