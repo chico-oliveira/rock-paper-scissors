@@ -1,19 +1,122 @@
+///////////////
+// VARIABLES //
+///////////////
+
+const gameButtons = document.querySelectorAll(".buttons button");
+const newGameButton = document.querySelector(".end-screen button");
+const playerScoreText = document.querySelector(".player .value");
+const playerChoiceDisplay = document.querySelector(".player .choice");
+const computerScoreText = document.querySelector(".computer .value");
+const computerChoiceDisplay = document.querySelector(".computer .choice");
+const feedbackText = document.querySelector(".feedback");
+const endFeedbackTexts = document.querySelectorAll(".end-feedback");
+const endScreen = document.querySelector(".end-screen");
+const overlay = document.querySelector(".overlay");
+
 // Creates possible options array
 let options = ["rock", "paper", "scissors"];
+let playerScore = 0;
+let computerScore = 0;
+
+/////////////////
+// DOM METHODS //
+/////////////////
+
+gameButtons.forEach(button => {
+    button.addEventListener('click', playerPick);
+});
+
+newGameButton.addEventListener('click', startNewGame);
+
+///////////////
+// FUNCTIONS //
+///////////////
+
 
 // Capitalizes first letter
 function Capitalize(string){
    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
-// returns one of the possibilities at random
-function computerPlay(){
+// Returns one of the possibilities at random
+function computerPick(){
 
     // Creates random number between 1 and 3 inclusive to use as an index for the array
     let index = Math.floor(Math.random()*(options.length));
 
     // Use the index to return the answer
     return options[index];
+}
+
+// Starts game based on what button the player picked
+function playerPick(e){
+    let playerSelection = e.currentTarget.getAttribute("id");
+    game(playerSelection);
+}
+
+// Displays the choices by the player and computer
+function Display_Choices(playerSelection, computerSelection){
+
+    // Removes previous images if they exist
+    if(computerChoiceDisplay.hasChildNodes()){
+        computerChoiceDisplay.removeChild(computerChoiceDisplay.lastChild);
+        playerChoiceDisplay.removeChild(playerChoiceDisplay.lastChild);
+    }
+
+    let selection;
+    let container;
+
+    // Creates new images and adds them to their respective elements 
+    for (let i = 0; i < 2; i++){
+        // Player
+        if (i === 0){
+            selection = playerSelection;
+            container = playerChoiceDisplay;
+        }
+        // Computer
+        else {
+            selection = computerSelection;
+            container = computerChoiceDisplay;
+        }
+
+        // Creates new image elements
+        let choice = "images/" + selection + "-choice.png";
+        let alt = selection + " icon";
+        const img = document.createElement('img');
+        img.src = choice;
+        img.alt = alt;
+        container.appendChild(img);
+    }
+}
+
+
+// Full 5 round game
+function game(player){
+
+    let computer = computerPick();
+    
+    // Displays Players' choices
+    Display_Choices(player, computer);
+    
+    // Plays round and stores result
+    let win = playRound(player, computer);
+    
+    // Given the result, updates the score
+    if (win) {
+        playerScore++;
+    }
+    else if(win === false){
+        computerScore++;
+    }
+    
+    UpdateResult(playerScore, computerScore);
+
+    // Checks if anyone gets 5 points
+    if (playerScore === 5) {
+        endGame(true);
+    } else if (computerScore === 5) {
+        endGame(false);
+    }
 }
 
 // Play one round of Rock Paper Scissors. Receive player and computer selections
@@ -23,7 +126,9 @@ function playRound(playerSelection, computerSelection){
 
     // In case of same selection, return a draw
     if (playerSelection === computerSelection){
-        console.log(`You Draw! Both picked ${Capitalize(computerSelection)}`);
+        feedbackText.textContent = `You Draw! Both picked ${Capitalize(computerSelection)}`;
+        playerChoiceDisplay.classList.toggle("lost", false);
+        computerChoiceDisplay.classList.toggle("lost", false);
         return null
     }
 
@@ -31,7 +136,9 @@ function playRound(playerSelection, computerSelection){
     if ((playerSelection === "rock" && computerSelection === "scissors") || (playerSelection === "scissors" && computerSelection === "paper") ||
         (playerSelection === "paper" && computerSelection === "rock")){
         
-        console.log(`You Win! ${Capitalize(playerSelection)} beats ${Capitalize(computerSelection)}`);
+        feedbackText.textContent = `You Win this round! ${Capitalize(playerSelection)} beats ${Capitalize(computerSelection)}`;
+        playerChoiceDisplay.classList.toggle("lost", false);
+        computerChoiceDisplay.classList.toggle("lost", true);
         return true
     } 
 
@@ -39,56 +146,49 @@ function playRound(playerSelection, computerSelection){
     if ((computerSelection === "rock" && playerSelection === "scissors") || (computerSelection === "scissors" && playerSelection === "paper") ||
     (computerSelection === "paper" && playerSelection === "rock")){
     
-        console.log(`You Lose! ${Capitalize(computerSelection)} beats ${Capitalize(playerSelection)}`);
+        feedbackText.textContent = `You Lost this round! ${Capitalize(computerSelection)} beats ${Capitalize(playerSelection)}`;
+        computerChoiceDisplay.classList.toggle("lost", false);
+        playerChoiceDisplay.classList.toggle("lost", true);
         return false
     } 
 }
 
-// Full 5 round game
-function game(){
+// Gets the scores and determines the result
+function UpdateResult(){
 
-    let playerScore = 0;
-    let computerScore = 0;
-    
-    // Loops the 5 rounds
-    for (let i=0; i < 5; i++){
-
-        // Gets player's selection and ensures it's one of the possible options
-        let player = window.prompt("Choose Rock, Paper or Scissors!");
-        while (!options.includes(player.toLowerCase())){
-            player = window.prompt("You didn't choose one of the options, ensure it's either Rock, Paper or Scissors!");
-        }
-        let computer = computerPlay();
-        
-        // Plays round and stores result
-        let win = playRound(player, computer);
-        
-        // Given the result, updates the score
-        if (win) {
-            playerScore++;
-        }
-        else if(win === false){
-            computerScore++;
-        }
-    }
-    
-    displayResult(playerScore, computerScore);
+    playerScoreText.textContent = `${playerScore}`;
+    computerScoreText.textContent = `${computerScore}`;
 }
 
-// Gets the scores and determines the result
-function displayResult(playerScore, computerScore){
-    let finalScore = `  [Score: ${playerScore} - ${computerScore}]`;
-
-    console.log("--------------------------------------------");    
-    // Compares scores and gives final result
-    if (playerScore > computerScore){
-        console.log(`Congratulations! You won :) ${finalScore}`);
-    }
-    else if (playerScore < computerScore){
-        console.log(`Sadge! You lost.. ${finalScore}`);
+// Ends game and resets scores
+function endGame(win){
+    
+    if (win){
+        endFeedbackTexts.forEach(feedback => {
+            feedback.textContent = "YOU WIN";
+        });
     }
     else {
-        console.log(`You drew.. Awkward... ${finalScore}`);
+        endFeedbackTexts.forEach(feedback => {
+            feedback.textContent = "YOU LOSE";
+        });
     }
-    console.log("--------------------------------------------");
+
+    feedbackText.textContent = '\xa0';
+    endScreen.classList.toggle("show");
+    overlay.classList.toggle("show");
+}
+
+function startNewGame() {
+
+    endScreen.classList.toggle("show");
+    overlay.classList.toggle("show");
+
+    playerScore = 0;
+    computerScore = 0;
+    feedbackText.textContent = "Choose your fate";
+    computerChoiceDisplay.removeChild(computerChoiceDisplay.lastChild);
+    playerChoiceDisplay.removeChild(playerChoiceDisplay.lastChild);
+
+    UpdateResult(); 
 }

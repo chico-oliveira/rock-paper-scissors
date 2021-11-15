@@ -1,12 +1,65 @@
 <!DOCTYPE html>
 <html lang="en-GB">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="author" content="Francisco Oliveira">
-        <meta name="description" content="This is a Rock Paper Scissors game to learn javascript">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-        <link rel="icon" href="images/rps-favicon.png" type="image/png">
-        <script src="scripts/app.js"></script>
-        <title>Rock Paper Scissors</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Francisco Oliveira">
+    <meta name="description" content="This is a Rock Paper Scissors game to learn javascript">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="icon" href="images/rps-favicon.png" type="image/png">
+    <link href="styles/reset.css" rel="stylesheet">
+    <link href="styles/stylesheet.css" rel="stylesheet">
+    <script src="scripts/app.js" defer></script>
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <div class="content">
+        <header>
+            <img src="images/rps-title.png" alt="Rock Paper Scissors text">
+        </header>
+        <main>
+            <div class="display">
+                <div class="score">
+                    <div class="player">
+                        <div class="text">
+                            <p>Player:</p>
+                            <p class="value">0</p>
+                        </div>
+                        <div class="choice"></div>
+                    </div>
+                    <div class="computer">
+                        <div class="text">
+                            <p>Computer:</p>
+                            <p class="value">0</p>
+                        </div>
+                        <div class="choice"></div>
+                    </div>
+                </div>
+            </div> 
+            <div class="end-screen">
+                <div class="end-text">
+                    <span class="end-feedback" id="feedback1"></span>
+                    <span class="end-feedback" id="feedback2"></span>
+                </div>
+                <button>Play Again</button>
+            </div> 
+            <div class="feedback">Choose your fate</div>
+            <div class="buttons">
+                <button id="rock"><img src="images/rock.png" alt="Rock icon"></button>
+                <button id="paper"><img src="images/paper.png" alt="Paper icon"></button>
+                <button id="scissors"><img src="images/scissors.png" alt="Scissors icon"></button>
+            </div>
+        </main>
+        <div class="sticky-footer">
+        </div>
+        <footer>
+            <p>Copyright © 2021</p>
+            <p>|</p>
+            <a href="https://github.com/chico-oliveira">
+                <img src="images/github.png" alt="Github logo">
+                <p>Francisco Oliveira</p>
+            </a>
+        </footer>
+        <div class="overlay"></div>
+    </div>
+</body>
 </html>
